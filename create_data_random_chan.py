@@ -235,23 +235,57 @@ def func_create_measurements(H, num_snapshots, snr_lin, mod='qpsk'):
         out_dict (dict): Dictionary of numpy arrays.
             A dictionary containing various arrays, including pilot data, received signals, noisy signals, and more.
     """
-    N, K = H.shape
-    pilot_data = np.random.randint(0, 4, (num_snapshots, K))
-    modulated_pilot_data = np.exp(1j * np.pi / 2 * (pilot_data * 2 - 1))
+    N = H.shape[0]
+    K = H.shape[1]
+
+    H = np.array(H,dtype=np.complex64)
     
-    signal_power = np.mean(np.abs(modulated_pilot_data) ** 2)
-    noise_power = signal_power / snr_lin
+    if(mod=='qpsk'):
+        x_pilot = np.random.choice([-1,1],[K,num_snapshots]) + 1j*np.random.choice([-1,1],[K,num_snapshots])
+        
+    if(mod=='16qam'):
+        x_pilot = np.random.choice([-3,-1,1,3],[K,num_snapshots]) + 1j*np.random.choice([-3,-1,1,3],[K,num_snapshots])
+        
+    x_pilot = np.array(x_pilot,dtype=np.complex64)
+    # x_pilot = np.random.choice([-3,-1,1,3],[K,num_snapshots]) + 1j*np.random.choice([-3,-1,1,3],[K,num_snapshots])
+
+    # Received unquantized noisy signal
+    r_noiseless = H@x_pilot
+
+    noise_vec = np.random.randn(N,num_snapshots) + 1j*np.random.randn(N,num_snapshots)
+    noise_vec = noise_vec / np.linalg.norm(noise_vec)  * np.sqrt(np.linalg.norm(r_noiseless)**2 / snr_lin)
+    noise_vec = np.array(noise_vec,dtype=np.complex64)
+
+    r = r_noiseless + noise_vec
     
-    noisy_data = modulated_pilot_data + np.random.normal(0, np.sqrt(noise_power / 2), (num_snapshots, K)) + \
-                 1j * np.random.normal(0, np.sqrt(noise_power / 2), (num_snapshots, K))
+    # One-bit data
+    y = ( np.sign(r.real) + 1j*np.sign(r.imag) )
+    y = np.array(y,dtype=np.complex64)
+
+    # Real-data
+    H_R = np.block([[H.real, -1*H.imag],[H.imag, H.real]])
+    y_R = np.block([[y.real],[y.imag]])
     
-    one_bit_received_signal = np.sign(np.real(noisy_data))
+    # Initial estimate
+    H_pinv = np.linalg.pinv(H)
+    x_zf = H_pinv @ y
     
-    out_dict = {
-        'pilot_data': modulated_pilot_data,
-        'received_signal': one_bit_received_signal,
-        'noisy_signal': noisy_data,
-    }
+    x_est = np.random.randn(K,num_snapshots) + 1j*np.random.randn(K,num_snapshots)
+
+    x_zf = x_zf / np.mean(np.abs(x_zf)) * np.sqrt(2)
+    
+    out_dict = {}
+    out_dict.update({'x_pilot':x_pilot})
+    out_dict.update({'r_noiseless':r_noiseless})
+    out_dict.update({'r':r})
+    out_dict.update({'y':y})
+    out_dict.update({'y_R':y_R})
+    out_dict.update({'H_R':H_R})
+    out_dict.update({'H_pinv':H_pinv})
+    out_dict.update({'x_est':x_est})
+    out_dict.update({'x_zf':x_zf})
+    
+    return out_dict
     
     return out_dict
 
@@ -325,7 +359,7 @@ def func_to_CNN_chan(x_in, grad_in):
         out_chan (Tensor): 3-D torch tensor.
     """
     K = int(x_in.shape[0] / 2)
-    out_chan = torch.stack([x_in[:K, :], x_in[K:, :], grad_in[:K, :], grad_in[K:, :])
+    out_chan = torch.stack([x_in[:K,:],x_in[K:,:],grad_in[:K,:],grad_in[K:,:]])
     out_chan = torch.moveaxis(out_chan, [0, 1, 2], [1, 2, 0])
     return out_chan
 
@@ -341,9 +375,12 @@ def func_to_CNN_chan_three_input(x_in, grad_in, x_obmnet):
     Returns:
         out_chan (Tensor): 3-D torch tensor.
     """
-    K = int(x_in.shape[0] / 2)
-    out_chan = torch.stack([x_in[:K, :], x_in[K:, :], grad_in[:K, :], grad_in[K:, :], x_obmnet[:K, :], x_obmnet[K:, :])
-    out_chan = torch.moveaxis(out_chan, [0, 1, 2], [1, 2, 0])
+    K = int(x_in.shape[0]/2)
+    
+    out_chan = torch.stack([x_in[:K,:],x_in[K:,:],grad_in[:K,:],grad_in[K:,:],
+                            x_obmnet[:K,:],x_obmnet[K:,:]])
+    out_chan = torch.moveaxis(out_chan,[0,1,2],[1,2,0])
+    
     return out_chan
 
 def func_from_CNN_chan(in_chan):
