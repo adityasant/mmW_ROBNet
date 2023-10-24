@@ -1,4 +1,15 @@
-# This script is used to train the mmW-ROBNet for a QPSK constellation.
+"""
+mmW-ROBNet Training Script
+
+This script is used to train the mmW-ROBNet for a QPSK constellation. The code is based on the following paper:
+
+- Sant, A. and Rao, B.D., 2023, June. Regularized Neural Detection for Millimeter Wave Massive Mimo Communication Systems with One-Bit Adcs. In ICASSP 2023-2023 IEEE International Conference on Acoustics, Speech and Signal Processing (ICASSP) (pp. 1-5). IEEE.
+
+The script defines the network architecture, sets various parameters, and runs the training loop. It also includes functions for data processing and loss calculations. The network is trained to optimize communication performance in the presence of noise and interference.
+
+Author: Aditya Sant
+
+"""
 
 import numpy as np
 from matplotlib import pyplot as plt
