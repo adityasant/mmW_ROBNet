@@ -35,8 +35,15 @@ The mmW-ROBNet is the key contribution of this project. Here's a brief summary o
 - **OBMNet Iteration:** At the beginning of each stage, the OBMNet iteration generates gradients and outputs, contributing to the signal detection process.
 
 - **User-Matched Gradient:** The mmWave-channel powers per user are matched to the OBMNet-generated gradient, improving the accuracy of signal detection.
-
+- 
 - **Regularization Network:** A regularization network fine-tunes the previous estimates, user-matched gradients, and OBMNet outputs.
+
+- **Stage-Dependent Correction:** A residual link from the OBMNet output corrects the unconstrained OBMNet step in a stage-dependent manner.
+
+- **Normalization:** The final output is normalized to ensure effective signal detection.
+
+
+
 
 
 
@@ -54,8 +61,3 @@ You can install NumPy, SciPy, and Matplotlib using pip:
 
 ```shell
 pip install numpy scipy matplotlib
-
-
-- **Stage-Dependent Correction:** A residual link from the OBMNet output corrects the unconstrained OBMNet step in a stage-dependent manner.
-
-- **Normalization:** The final output is normalized to ensure effective signal detection.
