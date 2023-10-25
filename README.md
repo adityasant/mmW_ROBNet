@@ -38,6 +38,24 @@ The mmW-ROBNet is the key contribution of this project. Here's a brief summary o
 
 - **Regularization Network:** A regularization network fine-tunes the previous estimates, user-matched gradients, and OBMNet outputs.
 
+
+
+## Prerequisites
+
+Before you get started, ensure you have met the following requirements:
+
+- [PyTorch](https://pytorch.org/) version 1.12 or higher.
+  - You can download PyTorch from the official [Docker container](https://hub.docker.com/r/pytorch/pytorch) (e.g., pytorch/pytorch:1.12.1-cuda11.3-cudnn8-runtime).
+- [NumPy](https://numpy.org/)
+- [SciPy](https://www.scipy.org/)
+- [Matplotlib](https://matplotlib.org/) for plotting
+
+You can install NumPy, SciPy, and Matplotlib using pip:
+
+```shell
+pip install numpy scipy matplotlib
+
+
 - **Stage-Dependent Correction:** A residual link from the OBMNet output corrects the unconstrained OBMNet step in a stage-dependent manner.
 
 - **Normalization:** The final output is normalized to ensure effective signal detection.
