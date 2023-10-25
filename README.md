@@ -69,13 +69,10 @@ pip install numpy scipy matplotlib
 
 
 
-## Running the Code
-
-To run the code, follow these steps:
 
 ## Running the Code
 
-To use the code for multi-user massive MIMO signal detection, follow these steps:
+The following are the steps for running the code, specifically for training and testing the mmW-ROBNet.
 
 1. **Data Generation:** The Python file `create_data_random_chan.py` contains various functions used for data generation and preprocessing. These functions are essential for creating the channel matrix, sorting users, and generating measurements.
 
