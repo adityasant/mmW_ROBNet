@@ -22,7 +22,7 @@ We implement a **hierarchical training strategy** to enhance the signal detectio
 
 ### mmW-ROBNet
 
-![mmW-ROBNet]([URL-to-your-uploaded-image.png](https://github.com/adityasant/mmW_ROBNet/blob/main/proj_robnet_overall_mmwave.png))
+![mmW-ROBNet](https://github.com/adityasant/mmW_ROBNet/blob/main/proj_robnet_overall_mmwave.png)
 
 The mmW-ROBNet is the key contribution of this project. Here's a brief summary of its features:
 
