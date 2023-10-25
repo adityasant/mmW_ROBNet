@@ -64,9 +64,7 @@ You can install NumPy, SciPy, and Matplotlib using pip:
 
 ```shell
 pip install numpy scipy matplotlib
-
-
-
+```
 
 
 
@@ -84,6 +82,7 @@ To use the code for multi-user massive MIMO signal detection, follow these steps
 
    ```shell
    python train_one_bit_mmW_ROBNet.py
+   ```
 
 The trained network will be saved in the Saved_Networks folder.
 
@@ -93,6 +92,7 @@ During training, the code will save checkpoint files for the trained network at 
 
    ```shell
    python test_script_mmW_ROBNet.py
+   ```
 
 The Bit Error Rate (BER) results will be saved in the BER_Results folder.
 
