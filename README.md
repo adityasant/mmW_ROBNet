@@ -1,5 +1,12 @@
 # Regularized Neural Detection for Millimeter Wave Massive MIMO Communication Systems with One-bit ADCs
 
+## Table of Contents
+- [About the Project](#about-the-project)
+- [mmW-ROBNet](#mmw-robnet)
+- [Prerequisites](#prerequisites)
+- [Running the Code](#running-the-code)
+- [Acknowledgements](#acknowledgements)
+
 ## About the Project
 
 Our project addresses the challenge of multi-user massive MIMO signal detection from one-bit received measurements, with a specific emphasis on the intricacies of the wireless channel. While many existing approaches concentrate on detector design for rich-scattering, homogeneous Rayleigh fading channels, we introduce a novel approach for detecting signals in the context of lower diversity millimeter-wave (mmWave) channels.
@@ -43,10 +50,6 @@ The mmW-ROBNet is the key contribution of this project. Here's a brief summary o
 - **Normalization:** The final output is normalized to ensure effective signal detection.
 
 
-
-
-
-
 ## Prerequisites
 
 Before you get started, ensure you have met the following requirements:
@@ -61,3 +64,37 @@ You can install NumPy, SciPy, and Matplotlib using pip:
 
 ```shell
 pip install numpy scipy matplotlib
+
+
+
+
+
+
+## Running the Code
+
+To run the code, follow these steps:
+
+## Running the Code
+
+To use the code for multi-user massive MIMO signal detection, follow these steps:
+
+1. **Data Generation:** The Python file `create_data_random_chan.py` contains various functions used for data generation and preprocessing. These functions are essential for creating the channel matrix, sorting users, and generating measurements.
+
+2. **Training:** To train the one-bit mmW-ROBNet, use the training script `train_one_bit_mmW_ROBNet.py`. You can run the training process using the following command:
+
+   ```shell
+   python train_one_bit_mmW_ROBNet.py
+
+The trained network will be saved in the Saved_Networks folder.
+
+During training, the code will save checkpoint files for the trained network at specific intervals, enabling you to resume training from the last saved checkpoint.
+
+3. **Testing:** For testing the network's performance, use the testing script test_script_mmW_ROBNet.py. Run the testing script using the following command:
+
+   ```shell
+   python test_script_mmW_ROBNet.py
+
+The Bit Error Rate (BER) results will be saved in the BER_Results folder.
+
+During testing, the code will save BER results for different signal-to-noise ratios (SNR) and users.
+
