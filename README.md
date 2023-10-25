@@ -18,3 +18,24 @@ We have devised a specialized loss function that is **constellation-aware**, ena
 
 #### 3. Hierarchical Detection Training Strategy
 We implement a **hierarchical training strategy** to enhance the signal detection process.
+
+
+### mmW-ROBNet
+
+The mmW-ROBNet is the key contribution of this project. Here's a brief summary of its features:
+
+- **Unfolded DNN Algorithm:** The mmW-ROBNet is developed as an approach to solve constrained optimizations for general channel matrices via a DNN-augmented GD algorithm.
+
+- **Channel-Specific Design:** The mmW-ROBNet framework incorporates the specific properties of the mmWave channel, making it suitable for the unique challenges of mmWave communications.
+
+- **T-Stage Regularized GD:** The framework unfolds a T-stage regularized GD algorithm into T distinct sub-networks, each represented as a stage.
+
+- **OBMNet Iteration:** At the beginning of each stage, the OBMNet iteration generates gradients and outputs, contributing to the signal detection process.
+
+- **User-Matched Gradient:** The mmWave-channel powers per user are matched to the OBMNet-generated gradient, improving the accuracy of signal detection.
+
+- **Regularization Network:** A regularization network fine-tunes the previous estimates, user-matched gradients, and OBMNet outputs.
+
+- **Stage-Dependent Correction:** A residual link from the OBMNet output corrects the unconstrained OBMNet step in a stage-dependent manner.
+
+- **Normalization:** The final output is normalized to ensure effective signal detection.
