@@ -6,6 +6,7 @@
 - [Prerequisites](#prerequisites)
 - [Running the Code](#running-the-code)
 - [Acknowledgements](#acknowledgements)
+- [Citation](#reference)
 
 ## About the Project
 
@@ -83,18 +84,24 @@ To use the code for multi-user massive MIMO signal detection, follow these steps
    ```shell
    python train_one_bit_mmW_ROBNet.py
    ```
-
-The trained network will be saved in the Saved_Networks folder.
-
-During training, the code will save checkpoint files for the trained network at specific intervals, enabling you to resume training from the last saved checkpoint.
+   The trained network will be saved in the Saved_Networks folder. During training, the code will save checkpoint files for the trained network at specific intervals, enabling you to resume training from the last saved checkpoint.
 
 3. **Testing:** For testing the network's performance, use the testing script test_script_mmW_ROBNet.py. Run the testing script using the following command:
 
    ```shell
    python test_script_mmW_ROBNet.py
    ```
+   The Bit Error Rate (BER) results will be saved in the BER_Results folder. During testing, the code will save BER results for different signal-to-noise ratios (SNR) and users.
 
-The Bit Error Rate (BER) results will be saved in the BER_Results folder.
 
-During testing, the code will save BER results for different signal-to-noise ratios (SNR) and users.
+## Acknowledgements
+The authors would like to acknowledge support from PRP - Nautilus for access to high speed GPU resources for training and testing of our scripts. This work was supported in part by National Science Foundation (NSF) awards CNS-1730158, ACI-1540112, ACI-1541349, OAC-1826967, OAC-2112167, CNS-2100237, CNS-2120019, the University of California Office of the President, and the University of California San Diego's California Institute for Telecommunications and Information Technology/Qualcomm Institute. Thanks to CENIC for the 100Gbps networks.
+
+
+## Reference
+
+If you use this code or find this work helpful in your research, please cite the following paper:
+
+Sant, A. and Rao, B.D., 2023, June. Regularized Neural Detection for Millimeter Wave Massive MIMO Communication Systems with One-Bit ADCs. In ICASSP 2023-2023 IEEE International Conference on Acoustics, Speech and Signal Processing (ICASSP) (pp. 1-5). IEEE.
+
 
