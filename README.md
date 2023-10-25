@@ -17,3 +17,4 @@ We have developed the **mmW-ROBNet**, which is a parametric deep learning system
 We have devised a specialized loss function that is **constellation-aware**, enabling more accurate and effective signal detection.
 
 ### 3. Hierarchical Detection Training Strategy
+We implement a **hierarchical training strategy** to enhance the signal detection process.
