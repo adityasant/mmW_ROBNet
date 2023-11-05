@@ -317,6 +317,7 @@ for trial_ind in np.arange(num_trials):
 
 
 # Save results
+BER_arr_1_user_avg = np.sum(BER_arr_1_user,axis=1) / num_snapshots / num_trials / 2
 ber_arr_mmw_robnet = BER_arr_1_user_avg
 
 np.save('BER_Results/ber_arr_mmw_robnet',ber_arr_mmw_robnet)
