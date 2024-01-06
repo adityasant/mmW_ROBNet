@@ -254,6 +254,9 @@ class Net_One_Bit(nn.Module):
         x_R = x_obmnet.T + del_x.T
         return x_R
 
+
+
+# Create DNN and load parameters from checkpoint
 net_one_bit_1 = Net_One_Bit(batch_size=num_snapshots)
 net_one_bit_1.to(device)
 net_one_bit_2 = Net_One_Bit(batch_size=num_snapshots)
@@ -264,6 +267,13 @@ net_one_bit_4 = Net_One_Bit(batch_size=num_snapshots)
 net_one_bit_4.to(device)
 net_one_bit_5 = Net_One_Bit(batch_size=num_snapshots)
 net_one_bit_5.to(device)
+
+exp_cp = torch.load(checkpoint_file_obirim,map_location=torch.device('cpu'))
+net_one_bit_1.load_state_dict(exp_cp['Net_1'])
+net_one_bit_2.load_state_dict(exp_cp['Net_2'])
+net_one_bit_3.load_state_dict(exp_cp['Net_3'])
+net_one_bit_4.load_state_dict(exp_cp['Net_4'])
+net_one_bit_5.load_state_dict(exp_cp['Net_5'])
 
 
 
